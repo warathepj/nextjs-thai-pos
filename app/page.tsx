@@ -24,7 +24,7 @@ interface MenuItem {
 interface CartItem extends MenuItem {
   quantity: number
 }
-
+// TODO interface
 interface Order {
   id: string
   items: CartItem[]
