@@ -27,7 +27,7 @@ const TablePage = () => {
 
   useEffect(() => {
     const fetchMenuItems = async () => {
-      const res = await fetch('/api/tables');
+      const res = await fetch('/api/menu-items');
       const data = await res.json();
       setMenuItems(data);
     };

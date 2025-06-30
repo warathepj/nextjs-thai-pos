@@ -49,9 +49,9 @@ export default function RootLayout({
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <Link href="/table">
+                    <Link href="/menu-items">
                       <Table className="h-4 w-4" />
-                      <span>Tables</span>
+                      <span>Menu Items</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
