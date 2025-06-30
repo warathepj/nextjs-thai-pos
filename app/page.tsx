@@ -99,7 +99,7 @@ export default function ThaiPOSSystem() {
     return cart.reduce((total, item) => total + item.quantity, 0)
   }
 
-  const processPayment = () => {
+  const processPayment = async () => {
     if (cart.length === 0) {
       toast({
         title: "ข้อผิดพลาด",
@@ -119,18 +119,32 @@ export default function ThaiPOSSystem() {
       return
     }
 
-    const newOrder: Order = {
-      id: `ORD-${Date.now()}`,
+    const orderData = {
       items: [...cart],
       total,
       paymentMethod: paymentMethod === "cash" ? "เงินสด" : "บัตรเครดิต",
-      timestamp: new Date(),
       customerName: customerName || undefined,
       notes: notes || undefined,
     }
 
-    setOrders((prev) => [newOrder, ...prev])
-    setCurrentOrder(newOrder)
+    const response = await fetch('/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const newOrder = await response.json();
+
+    const newOrderForState: Order = {
+      ...orderData,
+      id: newOrder.id,
+      timestamp: new Date(),
+    }
+
+    setOrders((prev) => [newOrderForState, ...prev])
+    setCurrentOrder(newOrderForState)
     setShowPayment(false)
     setShowReceipt(true)
     clearCart()

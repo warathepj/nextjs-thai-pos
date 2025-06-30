@@ -14,7 +14,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
-import { Home, Table } from "lucide-react"
+import { Home, Table, Receipt } from "lucide-react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -52,6 +52,14 @@ export default function RootLayout({
                     <Link href="/menu-items">
                       <Table className="h-4 w-4" />
                       <span>Menu Items</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href="/orders">
+                      <Receipt className="h-4 w-4" />
+                      <span>Orders</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
