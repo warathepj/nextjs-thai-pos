@@ -9,7 +9,10 @@ const config: Config = {
     "*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
-  	extend: {
+    extend: {
+      screens: {
+        tablet: '768px',
+      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

@@ -92,3 +92,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media (width: 768px) and (height: 1024px) {
+  body {
+    /* Example style for 768x1024 screen size */
+    background-color: #f0f0f0; /* Light gray background */
+    font-size: 16px;
+  }
+}
