@@ -44,6 +44,8 @@ const TablePage = () => {
             <TableHead>Name</TableHead>
             <TableHead>Price</TableHead>
             <TableHead>Category</TableHead>
+            <TableHead>Image</TableHead>
+            <TableHead>Image URL</TableHead>
             <TableHead>Available</TableHead>
           </TableRow>
         </TableHeader>
