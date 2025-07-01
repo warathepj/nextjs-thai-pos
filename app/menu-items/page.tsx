@@ -53,6 +53,8 @@ const TablePage = () => {
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.price}</TableCell>
               <TableCell>{item.category}</TableCell>
+              <TableCell><img src={item.image_url} alt={item.name} style={{ width: '50px', height: '50px' }} /></TableCell>
+              <TableCell>{item.image_url}</TableCell>
               <TableCell>{item.is_available ? 'Yes' : 'No'}</TableCell>
             </TableRow>
           ))}
