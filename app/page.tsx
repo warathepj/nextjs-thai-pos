@@ -137,6 +137,32 @@ export default function ThaiPOSSystem() {
 
     const newOrder = await response.json();
 
+    // Save payment data
+    const paymentData = {
+      order_id: newOrder.id,
+      payment_method: paymentMethod === "cash" ? "เงินสด" : "บัตรเครดิต",
+      amount_paid: total,
+      change_amount: getChange(),
+    };
+
+    const paymentResponse = await fetch('/api/payments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(paymentData),
+    });
+
+    if (!paymentResponse.ok) {
+      console.error("Failed to save payment:", await paymentResponse.text());
+      toast({
+        title: "ข้อผิดพลาด",
+        description: "ไม่สามารถบันทึกข้อมูลการชำระเงินได้",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const newOrderForState: Order = {
       ...orderData,
       id: newOrder.id,

@@ -12,10 +12,11 @@ import {
 
 interface Payment {
   id: number;
-  order_id: number;
-  amount: number;
+  order_id: string;
+  amount_paid: number;
   payment_method: string;
-  payment_date: string;
+  created_at: string;
+  change_amount: number;
 }
 
 export default function PaymentsPage() {
@@ -58,8 +59,9 @@ export default function PaymentsPage() {
           <TableRow>
             <TableHead>ID</TableHead>
             <TableHead>Order ID</TableHead>
-            <TableHead>Amount</TableHead>
+            <TableHead>Amount Paid</TableHead>
             <TableHead>Payment Method</TableHead>
+            <TableHead>Change Amount</TableHead>
             <TableHead>Payment Date</TableHead>
           </TableRow>
         </TableHeader>
@@ -68,9 +70,10 @@ export default function PaymentsPage() {
             <TableRow key={payment.id}>
               <TableCell>{payment.id}</TableCell>
               <TableCell>{payment.order_id}</TableCell>
-              <TableCell>{payment.amount}</TableCell>
+              <TableCell>{payment.amount_paid}</TableCell>
               <TableCell>{payment.payment_method}</TableCell>
-              <TableCell>{new Date(payment.payment_date).toLocaleString()}</TableCell>
+              <TableCell>{payment.change_amount}</TableCell>
+              <TableCell>{new Date(payment.created_at).toLocaleString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
