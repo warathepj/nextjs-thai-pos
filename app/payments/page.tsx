@@ -73,7 +73,7 @@ export default function PaymentsPage() {
               <TableCell>{payment.amount_paid}</TableCell>
               <TableCell>{payment.payment_method}</TableCell>
               <TableCell>{payment.change_amount}</TableCell>
-              <TableCell>{new Date(payment.created_at).toLocaleString()}</TableCell>
+              <TableCell>{new Date(payment.created_at + 'Z').toLocaleString('en-US', { timeZone: 'Asia/Bangkok', hour: 'numeric', minute: 'numeric', second: 'numeric' })}</TableCell>
             </TableRow>
           ))}
         </TableBody>

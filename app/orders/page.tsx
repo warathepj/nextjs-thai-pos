@@ -54,7 +54,7 @@ const OrdersPage = () => {
               <TableCell>{order.total_amount}</TableCell>
               <TableCell>{order.payment_method}</TableCell>
               <TableCell>{order.status}</TableCell>
-              <TableCell>{new Date(order.created_at).toLocaleString()}</TableCell>
+              <TableCell>{new Date(order.created_at + 'Z').toLocaleString('en-US', { timeZone: 'Asia/Bangkok', hour: 'numeric', minute: 'numeric', second: 'numeric' })}</TableCell>
             </TableRow>
           ))}
         </TableBody>
