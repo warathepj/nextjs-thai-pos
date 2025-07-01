@@ -71,6 +71,14 @@ export default function RootLayout({
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link href="/payments">
+                      <Receipt className="h-4 w-4" />
+                      <span>Payments</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarContent>
           </Sidebar>
