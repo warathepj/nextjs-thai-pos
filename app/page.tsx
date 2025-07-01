@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -17,8 +17,9 @@ interface MenuItem {
   id: number
   name: string
   price: number
-  image: string
+  image_url: string
   category: string
+  is_available: boolean
 }
 
 interface CartItem extends MenuItem {
@@ -35,15 +36,8 @@ interface Order {
   notes?: string
 }
 
-const menuItems: MenuItem[] = [
-  { id: 1, name: "อกไก่ทอด", price: 30, image: "/placeholder.svg?height=150&width=150", category: "ไก่ทอด" },
-  { id: 2, name: "น่องไก่ทอด", price: 20, image: "/placeholder.svg?height=150&width=150", category: "ไก่ทอด" },
-  { id: 3, name: "ปีกไก่ทอด", price: 20, image: "/placeholder.svg?height=150&width=150", category: "ไก่ทอด" },
-  { id: 4, name: "ข้าวเหนียว", price: 10, image: "/placeholder.svg?height=150&width=150", category: "ข้าวและของหวาน" },
-  { id: 5, name: "น้ำพริกหนุ่ม", price: 10, image: "/placeholder.svg?height=150&width=150", category: "เครื่องเคียง" },
-]
-
 export default function ThaiPOSSystem() {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
   const [cart, setCart] = useState<CartItem[]>([])
   const [orders, setOrders] = useState<Order[]>([])
   const [currentOrder, setCurrentOrder] = useState<Order | null>(null)
@@ -54,6 +48,28 @@ export default function ThaiPOSSystem() {
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "card">("cash")
   const [cashReceived, setCashReceived] = useState("")
   const { toast } = useToast()
+
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const response = await fetch('/api/menu-items')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        setMenuItems(data)
+      } catch (error) {
+        console.error("Failed to fetch menu items:", error)
+        toast({
+          title: "ข้อผิดพลาด",
+          description: "ไม่สามารถโหลดเมนูอาหารได้",
+          variant: "destructive",
+        })
+      }
+    }
+
+    fetchMenuItems()
+  }, [])
 
   const addToCart = (item: MenuItem) => {
     setCart((prevCart) => {
@@ -213,7 +229,7 @@ export default function ThaiPOSSystem() {
                         <CardContent className="p-3">
                           <div className="flex items-center space-x-3">
                             <img
-                              src={item.image || "/placeholder.svg"}
+                              src={item.image_url || "/placeholder.svg"}
                               alt={item.name}
                               className="w-16 h-16 object-cover rounded-lg"
                             />
