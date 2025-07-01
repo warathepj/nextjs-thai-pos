@@ -15,6 +15,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Home, Table, Receipt, List } from "lucide-react"
+import { OpenSideNav } from "@/components/open-side-nav"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -34,9 +35,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <SidebarProvider>
           <Sidebar>
-            <SidebarHeader>
-              <SidebarTrigger />
-            </SidebarHeader>
+            <SidebarHeader />
             <SidebarContent>
               <SidebarMenu>
                 <SidebarMenuItem>
@@ -83,6 +82,7 @@ export default function RootLayout({
             </SidebarContent>
           </Sidebar>
           <main>
+            <OpenSideNav />
             {children}
           </main>
         </SidebarProvider>
